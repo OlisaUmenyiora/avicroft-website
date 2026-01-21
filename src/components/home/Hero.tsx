@@ -82,9 +82,9 @@ export function Hero() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="mt-6 text-lg md:text-xl text-gray-500 max-w-xl mx-auto"
         >
-          Featuring Education, E-commerce, and Salon
+          Simple, affordable software for wellness businesses
           <br className="hidden sm:block" />
-          management solutions for Africa.
+          and schools. Minimalist. Easy to use. Free to start.
         </motion.p>
 
         {/* CTAs */}

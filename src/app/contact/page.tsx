@@ -157,9 +157,8 @@ export default function ContactPage() {
                         className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-gray-900 focus:border-[var(--brand)] focus:outline-none focus:ring-2 focus:ring-[var(--brand)]/20 transition-all"
                       >
                         <option value="">Select a product</option>
-                        <option value="salon">Avicroft Salon</option>
-                        <option value="education">Avicroft Education</option>
-                        <option value="ecommerce">Avicroft E-commerce</option>
+                        <option value="wellness">Avicroft Wellness</option>
+                        <option value="education">Avicroft Education (Coming Soon)</option>
                         <option value="other">Other</option>
                       </select>
                     </div>

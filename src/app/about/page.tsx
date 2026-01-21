@@ -73,7 +73,7 @@ export default function AboutPage() {
                 We believe every business deserves access to powerful software tools. Our mission is to democratize technology by building products that are intuitive, affordable, and built for the unique needs of growing businesses.
               </p>
               <p className="text-lg text-gray-500 leading-relaxed">
-                From salon management to school administration to e-commerce, we are committed to helping businesses digitize their operations and unlock new opportunities for growth.
+                From wellness businesses to schools, we are committed to helping you digitize your operations and unlock new opportunities for growth—with software that&apos;s simple, affordable, and built to grow with you.
               </p>
             </motion.div>
             <motion.div

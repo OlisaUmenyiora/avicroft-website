@@ -3,14 +3,13 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { ArrowRight, Check } from 'lucide-react';
+import { ArrowRight, Check, Clock } from 'lucide-react';
 import { PRODUCTS } from '@/lib/constants';
 
-const cardColors = [
-  'from-[var(--brand)] to-[#E8C400]',
-  'from-blue-500 to-blue-600',
-  'from-purple-500 to-purple-600',
-];
+const cardColors: Record<string, string> = {
+  wellness: 'from-[var(--brand)] to-[#E8C400]',
+  education: 'from-blue-500 to-blue-600',
+};
 
 export default function ProductsPage() {
   return (
@@ -61,14 +60,33 @@ export default function ProductsPage() {
                       sizes="(max-width: 1024px) 100vw, 50vw"
                     />
                     {/* Gradient overlay */}
-                    <div className={`absolute inset-0 bg-gradient-to-t ${cardColors[index]} opacity-10`} />
+                    <div className={`absolute inset-0 bg-gradient-to-t ${cardColors[product.id]} opacity-10`} />
+                    {/* Coming Soon Badge */}
+                    {product.status === 'coming_soon' && (
+                      <div className="absolute top-4 right-4 px-4 py-2 bg-blue-500 text-white text-sm font-semibold rounded-full flex items-center gap-2">
+                        <Clock className="w-4 h-4" />
+                        Coming Soon
+                      </div>
+                    )}
                   </div>
                 </div>
 
                 {/* Content */}
                 <div className="w-full lg:w-1/2">
-                  <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${cardColors[index]} flex items-center justify-center mb-6`}>
-                    <ProductIcon name={product.id} />
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${cardColors[product.id]} flex items-center justify-center`}>
+                      <ProductIcon name={product.id} />
+                    </div>
+                    {product.status === 'coming_soon' && (
+                      <span className="px-3 py-1 text-sm font-medium bg-blue-100 text-blue-700 rounded-full">
+                        Coming Soon
+                      </span>
+                    )}
+                    {product.status === 'ready' && (
+                      <span className="px-3 py-1 text-sm font-medium bg-green-100 text-green-700 rounded-full">
+                        Available Now
+                      </span>
+                    )}
                   </div>
                   <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
                     {product.name}
@@ -87,7 +105,7 @@ export default function ProductsPage() {
                         key={feature}
                         className="flex items-center gap-3 text-gray-600"
                       >
-                        <span className={`w-5 h-5 rounded-full bg-gradient-to-br ${cardColors[index]} flex items-center justify-center flex-shrink-0`}>
+                        <span className={`w-5 h-5 rounded-full bg-gradient-to-br ${cardColors[product.id]} flex items-center justify-center flex-shrink-0`}>
                           <Check className="w-3 h-3 text-white" />
                         </span>
                         {feature}
@@ -100,7 +118,11 @@ export default function ProductsPage() {
                     <Link
                       href={product.url}
                       target="_blank"
-                      className="inline-flex items-center gap-2 rounded-full bg-gray-900 text-white px-6 py-3 text-base font-semibold hover:bg-black transition-colors"
+                      className={`inline-flex items-center gap-2 rounded-full px-6 py-3 text-base font-semibold transition-colors ${
+                        product.status === 'ready'
+                          ? 'bg-gray-900 text-white hover:bg-black'
+                          : 'bg-blue-500 text-white hover:bg-blue-600'
+                      }`}
                     >
                       {product.ctaText}
                       <ArrowRight className="w-4 h-4" />
@@ -161,20 +183,15 @@ export default function ProductsPage() {
 
 function ProductIcon({ name }: { name: string }) {
   const icons: Record<string, React.ReactNode> = {
-    education: (
+    wellness: (
       <svg className="w-6 h-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+      </svg>
+    ),
+    education: (
+      <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5z" />
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
-      </svg>
-    ),
-    ecommerce: (
-      <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-      </svg>
-    ),
-    salon: (
-      <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
     ),
   };
