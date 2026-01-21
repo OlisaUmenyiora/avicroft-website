@@ -66,6 +66,9 @@ export function Navbar() {
 
       {/* Mobile Menu */}
       <MobileMenu open={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
+
+      {/* Spacer to prevent content from going under fixed header */}
+      <div className="h-20 md:h-24" />
     </>
   );
 }
