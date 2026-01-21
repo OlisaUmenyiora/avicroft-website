@@ -17,7 +17,7 @@ describe('Navbar', () => {
 
   it('renders login button', () => {
     render(<Navbar />);
-    expect(screen.getByText('Login')).toBeInTheDocument();
+    expect(screen.getByText('Log in')).toBeInTheDocument();
   });
 
   it('has correct link destinations', () => {

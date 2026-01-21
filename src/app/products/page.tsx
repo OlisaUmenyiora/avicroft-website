@@ -1,72 +1,95 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
+import { ArrowRight, Check } from 'lucide-react';
 import { PRODUCTS } from '@/lib/constants';
-import { ArrowRight } from 'lucide-react';
 
-export const metadata = {
-  title: 'Products | Avicroft',
-  description: 'Explore Avicroft software products - Salon, Education, and E-commerce solutions built to grow with you.',
-};
+const cardColors = [
+  'from-[var(--brand)] to-[#E8C400]',
+  'from-blue-500 to-blue-600',
+  'from-purple-500 to-purple-600',
+];
 
 export default function ProductsPage() {
   return (
     <div className="bg-white">
       {/* Hero Section */}
-      <section className="bg-[var(--brand)] py-16 md:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-black mb-4">
+      <section className="py-20 md:py-32 bg-gradient-to-b from-gray-50 to-white">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6"
+          >
             Our Products
-          </h1>
-          <p className="text-lg md:text-xl text-black/80 max-w-2xl mx-auto">
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="text-lg md:text-xl text-gray-500 max-w-2xl mx-auto"
+          >
             Software solutions designed to help your business grow. Choose the product that fits your needs.
-          </p>
+          </motion.p>
         </div>
       </section>
 
       {/* Products Grid */}
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-8 md:gap-12">
+          <div className="space-y-16 md:space-y-24">
             {PRODUCTS.map((product, index) => (
-              <div
+              <motion.div
                 key={product.id}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
                 className={`flex flex-col ${
                   index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'
-                } gap-8 lg:gap-12 items-center`}
+                } gap-8 lg:gap-16 items-center`}
               >
                 {/* Image */}
                 <div className="w-full lg:w-1/2">
-                  <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-[var(--muted)]">
+                  <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-gray-100 group">
                     <Image
                       src={product.image}
                       alt={product.name}
                       fill
-                      className="object-cover"
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
                       sizes="(max-width: 1024px) 100vw, 50vw"
                     />
+                    {/* Gradient overlay */}
+                    <div className={`absolute inset-0 bg-gradient-to-t ${cardColors[index]} opacity-10`} />
                   </div>
                 </div>
 
                 {/* Content */}
                 <div className="w-full lg:w-1/2">
-                  <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">
+                  <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${cardColors[index]} flex items-center justify-center mb-6`}>
+                    <ProductIcon name={product.id} />
+                  </div>
+                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
                     {product.name}
                   </h2>
-                  <p className="text-lg text-[var(--label-secondary)] mb-6">
+                  <p className="text-xl text-gray-600 mb-4">
                     {product.tagline}
                   </p>
-                  <p className="text-base text-[var(--label-tertiary)] mb-6">
+                  <p className="text-gray-500 mb-8 leading-relaxed">
                     {product.description}
                   </p>
 
                   {/* Features */}
-                  <ul className="grid grid-cols-2 gap-3 mb-8">
+                  <ul className="space-y-3 mb-8">
                     {product.features.map((feature) => (
                       <li
                         key={feature}
-                        className="flex items-center gap-2 text-sm text-[var(--label-secondary)]"
+                        className="flex items-center gap-3 text-gray-600"
                       >
-                        <span className="w-1.5 h-1.5 rounded-full bg-[var(--brand)]" />
+                        <span className={`w-5 h-5 rounded-full bg-gradient-to-br ${cardColors[index]} flex items-center justify-center flex-shrink-0`}>
+                          <Check className="w-3 h-3 text-white" />
+                        </span>
                         {feature}
                       </li>
                     ))}
@@ -77,43 +100,84 @@ export default function ProductsPage() {
                     <Link
                       href={product.url}
                       target="_blank"
-                      className="inline-flex items-center gap-2 rounded-full bg-[var(--brand)] px-6 py-3 text-base font-bold text-black hover:bg-[var(--brand-hover)] transition-colors"
+                      className="inline-flex items-center gap-2 rounded-full bg-gray-900 text-white px-6 py-3 text-base font-semibold hover:bg-black transition-colors"
                     >
                       {product.ctaText}
                       <ArrowRight className="w-4 h-4" />
                     </Link>
                     <Link
                       href={`/products/${product.id}`}
-                      className="inline-flex items-center gap-2 rounded-full border-2 border-black px-6 py-3 text-base font-bold text-black hover:bg-black hover:text-white transition-colors"
+                      className="inline-flex items-center gap-2 rounded-full border border-gray-200 text-gray-700 px-6 py-3 text-base font-semibold hover:border-gray-300 hover:bg-gray-50 transition-colors"
                     >
                       Learn more
                     </Link>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="bg-black py-16 md:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Ready to get started?
-          </h2>
-          <p className="text-lg text-white/70 mb-8 max-w-2xl mx-auto">
-            Join thousands of businesses already using Avicroft products to grow.
-          </p>
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-2 rounded-full bg-[var(--brand)] px-8 py-4 text-lg font-bold text-black hover:bg-[var(--brand-hover)] transition-colors"
+      <section className="bg-gray-950 py-20 md:py-28">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-3xl md:text-4xl font-bold text-white mb-4"
           >
-            Contact us
-            <ArrowRight className="w-5 h-5" />
-          </Link>
+            Ready to get started?
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-lg text-gray-400 mb-8 max-w-xl mx-auto"
+          >
+            Join thousands of businesses already using Avicroft products to grow.
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+          >
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 rounded-full bg-white text-gray-900 px-7 py-3.5 text-base font-semibold hover:bg-gray-100 transition-colors"
+            >
+              Contact us
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </motion.div>
         </div>
       </section>
     </div>
   );
+}
+
+function ProductIcon({ name }: { name: string }) {
+  const icons: Record<string, React.ReactNode> = {
+    education: (
+      <svg className="w-6 h-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+      </svg>
+    ),
+    ecommerce: (
+      <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+      </svg>
+    ),
+    salon: (
+      <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    ),
+  };
+
+  return icons[name] || null;
 }

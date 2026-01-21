@@ -1,6 +1,5 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import LoginPage from '@/app/login/page';
-import { PRODUCTS } from '@/lib/constants';
 
 describe('Login Page', () => {
   it('renders the welcome message', () => {
@@ -8,54 +7,57 @@ describe('Login Page', () => {
     expect(screen.getByText('Welcome back')).toBeInTheDocument();
   });
 
-  it('renders product selection instructions', () => {
+  it('renders the Avicroft logo', () => {
     render(<LoginPage />);
-    expect(screen.getByText('Select your product to login')).toBeInTheDocument();
+    const logo = screen.getByAltText('Avicroft');
+    expect(logo).toBeInTheDocument();
   });
 
-  it('renders all product options', () => {
+  it('renders Google sign-in button', () => {
     render(<LoginPage />);
-    PRODUCTS.forEach((product) => {
-      expect(screen.getByText(`Avicroft ${product.name}`)).toBeInTheDocument();
-    });
+    expect(screen.getByText('Continue with Google')).toBeInTheDocument();
   });
 
-  it('renders product taglines', () => {
+  it('renders other options button', () => {
     render(<LoginPage />);
-    PRODUCTS.forEach((product) => {
-      expect(screen.getByText(product.tagline)).toBeInTheDocument();
-    });
+    expect(screen.getByText('See other options')).toBeInTheDocument();
   });
 
-  it('has correct links to product login pages', () => {
+  it('renders email input', () => {
     render(<LoginPage />);
-    PRODUCTS.forEach((product) => {
-      const link = screen.getByText(`Avicroft ${product.name}`).closest('a');
-      expect(link).toHaveAttribute('href', product.url);
-      expect(link).toHaveAttribute('target', '_blank');
-    });
+    expect(screen.getByPlaceholderText('Enter email address')).toBeInTheDocument();
   });
 
-  it('renders sign up link', () => {
+  it('renders continue button', () => {
     render(<LoginPage />);
-    expect(screen.getByText(/Don't have an account/i)).toBeInTheDocument();
-    expect(screen.getByText('Get started for free')).toBeInTheDocument();
+    expect(screen.getByText('Continue')).toBeInTheDocument();
   });
 
-  it('has correct link to products page for signup', () => {
+  it('renders terms and privacy links', () => {
     render(<LoginPage />);
-    const signupLink = screen.getByText('Get started for free').closest('a');
-    expect(signupLink).toHaveAttribute('href', '/products');
+    expect(screen.getByText('Terms of Service')).toBeInTheDocument();
+    expect(screen.getByText('Privacy Policy')).toBeInTheDocument();
   });
 
-  it('renders support link', () => {
+  it('has correct legal link destinations', () => {
     render(<LoginPage />);
-    expect(screen.getByText('Contact support')).toBeInTheDocument();
+    const termsLink = screen.getByText('Terms of Service').closest('a');
+    const privacyLink = screen.getByText('Privacy Policy').closest('a');
+
+    expect(termsLink).toHaveAttribute('href', '/terms');
+    expect(privacyLink).toHaveAttribute('href', '/privacy');
   });
 
-  it('has correct link to contact page for support', () => {
+  it('shows product selection after form submit', async () => {
     render(<LoginPage />);
-    const supportLink = screen.getByText('Contact support').closest('a');
-    expect(supportLink).toHaveAttribute('href', '/contact');
+
+    const emailInput = screen.getByPlaceholderText('Enter email address');
+    const submitButton = screen.getByText('Continue');
+
+    fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
+    fireEvent.click(submitButton);
+
+    // After submission, should show product selection
+    expect(screen.getByText('Select your product to continue')).toBeInTheDocument();
   });
 });

@@ -4,7 +4,7 @@ export const PRODUCTS = [
     id: 'education',
     name: 'Education',
     tagline: 'School Management System for Africa',
-    description: 'Relaxed happy person using laptop in a bright modern space, coffee nearby. Genuine smile, looking at screen like something just worked. Soft natural lighting, clean background. Warm and inviting. No text.',
+    description: 'Complete school management platform designed for African educational institutions. Streamline administration, enhance learning.',
     features: [
       'Student records',
       'Attendance tracking',

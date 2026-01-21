@@ -4,49 +4,50 @@ import { Hero } from '@/components/home/Hero';
 describe('Hero', () => {
   it('renders the main headline', () => {
     render(<Hero />);
-    expect(screen.getByText(/Software Products/i)).toBeInTheDocument();
-    expect(screen.getByText(/Built to Grow/i)).toBeInTheDocument();
+    expect(screen.getByText(/Software products/i)).toBeInTheDocument();
+    expect(screen.getByText(/built to grow/i)).toBeInTheDocument();
   });
 
-  it('renders the "YOU!" emphasis text', () => {
+  it('renders the "you" emphasis text', () => {
     render(<Hero />);
-    expect(screen.getByText(/YOU!/i)).toBeInTheDocument();
+    expect(screen.getByText('you')).toBeInTheDocument();
   });
 
-  it('renders the "Get Started for free now" CTA button', () => {
+  it('renders the primary CTA button', () => {
     render(<Hero />);
-    expect(screen.getByText(/Get Started for free now/i)).toBeInTheDocument();
+    expect(screen.getByText(/Get started free/i)).toBeInTheDocument();
   });
 
-  it('renders CTA links', () => {
+  it('renders the secondary CTA button', () => {
     render(<Hero />);
-    // Multiple "Learn more" links exist (hero + carousel cards)
-    const learnMoreLinks = screen.getAllByText(/Learn more/i);
-    expect(learnMoreLinks.length).toBeGreaterThan(0);
+    expect(screen.getByText(/See our products/i)).toBeInTheDocument();
   });
 
   it('has correct CTA link destinations', () => {
     render(<Hero />);
-    const getStartedLink = screen.getByText(/Get Started for free now/i).closest('a');
-    // Get the Learn more link in the hero section (links to /about)
-    const learnMoreLinks = screen.getAllByText(/Learn more/i);
-    const heroLearnMoreLink = learnMoreLinks.find(
-      (el) => el.closest('a')?.getAttribute('href') === '/about'
-    );
+    const getStartedLink = screen.getByText(/Get started free/i).closest('a');
+    const seeProductsLink = screen.getByText(/See our products/i).closest('a');
 
     expect(getStartedLink).toHaveAttribute('href', '/products');
-    expect(heroLearnMoreLink).toBeDefined();
+    expect(seeProductsLink).toHaveAttribute('href', '/about');
   });
 
-  it('renders the ProductCarousel component', () => {
+  it('renders the Avicroft logo in app icon', () => {
     render(<Hero />);
-    // Check for carousel controls - there are 2 carousels (mobile and desktop)
-    const swipeTexts = screen.getAllByText('Swipe');
-    expect(swipeTexts.length).toBeGreaterThan(0);
+    const logo = screen.getByAltText('Avicroft');
+    expect(logo).toBeInTheDocument();
+  });
 
-    const prevButtons = screen.getAllByLabelText('Previous product');
-    const nextButtons = screen.getAllByLabelText('Next product');
-    expect(prevButtons.length).toBeGreaterThan(0);
-    expect(nextButtons.length).toBeGreaterThan(0);
+  it('renders the social proof section', () => {
+    render(<Hero />);
+    expect(screen.getByText(/Trusted by design teams at/i)).toBeInTheDocument();
+  });
+
+  it('renders trusted brand names', () => {
+    render(<Hero />);
+    expect(screen.getByText('Uber')).toBeInTheDocument();
+    expect(screen.getByText('airbnb')).toBeInTheDocument();
+    expect(screen.getByText('Revolut')).toBeInTheDocument();
+    expect(screen.getByText('Pinterest')).toBeInTheDocument();
   });
 });
