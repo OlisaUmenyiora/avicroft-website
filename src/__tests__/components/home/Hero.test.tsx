@@ -44,11 +44,12 @@ describe('Hero', () => {
     expect(screen.getByText(/Trusted by design teams at/i)).toBeInTheDocument();
   });
 
-  it('renders trusted brand names', () => {
+  it('renders trusted brand logos', () => {
     render(<Hero />);
-    expect(screen.getByText('Uber')).toBeInTheDocument();
-    expect(screen.getByText('airbnb')).toBeInTheDocument();
-    expect(screen.getByText('Revolut')).toBeInTheDocument();
-    expect(screen.getByText('Pinterest')).toBeInTheDocument();
+    // Brand logos are now SVGs with aria-label
+    expect(screen.getByLabelText('Uber')).toBeInTheDocument();
+    expect(screen.getByLabelText('Airbnb')).toBeInTheDocument();
+    expect(screen.getByLabelText('Revolut')).toBeInTheDocument();
+    expect(screen.getByLabelText('Pinterest')).toBeInTheDocument();
   });
 });

@@ -10,7 +10,7 @@ describe('Home Page', () => {
   it('renders the main tagline', () => {
     render(<Home />);
     expect(screen.getByText(/built to grow/i)).toBeInTheDocument();
-    expect(screen.getByText('you')).toBeInTheDocument();
+    expect(screen.getByText('YOU')).toBeInTheDocument();
   });
 
   it('renders CTAs', () => {
