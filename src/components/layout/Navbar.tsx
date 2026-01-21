@@ -23,7 +23,7 @@ export function Navbar() {
                 alt="Avicroft"
                 width={120}
                 height={32}
-                className="h-7 w-auto"
+                className="h-7 w-auto brightness-0"
                 priority
               />
             </Link>
@@ -66,9 +66,6 @@ export function Navbar() {
 
       {/* Mobile Menu */}
       <MobileMenu open={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
-
-      {/* Spacer to prevent content from going under fixed header */}
-      <div className="h-20 md:h-24" />
     </>
   );
 }

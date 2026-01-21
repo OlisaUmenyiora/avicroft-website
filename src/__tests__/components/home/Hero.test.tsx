@@ -8,9 +8,9 @@ describe('Hero', () => {
     expect(screen.getByText(/built to grow/i)).toBeInTheDocument();
   });
 
-  it('renders the "you" emphasis text', () => {
+  it('renders the "YOU" emphasis text', () => {
     render(<Hero />);
-    expect(screen.getByText('you')).toBeInTheDocument();
+    expect(screen.getByText('YOU')).toBeInTheDocument();
   });
 
   it('renders the primary CTA button', () => {
@@ -32,10 +32,11 @@ describe('Hero', () => {
     expect(seeProductsLink).toHaveAttribute('href', '/about');
   });
 
-  it('renders the Avicroft logo in app icon', () => {
+  it('renders the flip box with product names', () => {
     render(<Hero />);
-    const logo = screen.getByAltText('Avicroft');
-    expect(logo).toBeInTheDocument();
+    // The flip box shows either Aura or Scholar
+    const flipBoxText = screen.getByText(/Aura|Scholar/);
+    expect(flipBoxText).toBeInTheDocument();
   });
 
   it('renders the social proof section', () => {

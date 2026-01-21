@@ -1,9 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
 // Brand logos for social proof
 const TRUSTED_BY = [
@@ -13,35 +13,77 @@ const TRUSTED_BY = [
   { name: 'Pinterest', logo: 'Pinterest' },
 ];
 
+// Products for the flip animation
+const FLIP_PRODUCTS = [
+  { name: 'Aura', color: '#FAD400' },
+  { name: 'Scholar', color: '#3B82F6' },
+];
+
+function FlipBox() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % FLIP_PRODUCTS.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const currentProduct = FLIP_PRODUCTS[currentIndex];
+
+  return (
+    <div className="relative w-20 h-20 md:w-24 md:h-24" style={{ perspective: '1000px' }}>
+      {/* Shadow/glow effect */}
+      <motion.div
+        className="absolute inset-0 blur-2xl rounded-full scale-150"
+        animate={{ backgroundColor: `${currentProduct.color}40` }}
+        transition={{ duration: 0.5 }}
+      />
+
+      {/* Flip container */}
+      <div className="relative w-full h-full" style={{ transformStyle: 'preserve-3d' }}>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentIndex}
+            initial={{ rotateX: -90, opacity: 0 }}
+            animate={{ rotateX: 0, opacity: 1 }}
+            exit={{ rotateX: 90, opacity: 0 }}
+            transition={{
+              duration: 0.6,
+              ease: [0.4, 0, 0.2, 1],
+            }}
+            className="absolute inset-0 rounded-[28%] shadow-lg flex items-center justify-center"
+            style={{
+              backgroundColor: currentProduct.color,
+              backfaceVisibility: 'hidden',
+            }}
+          >
+            <span className="text-lg md:text-xl font-bold text-black tracking-tight">
+              {currentProduct.name}
+            </span>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+    </div>
+  );
+}
+
 export function Hero() {
   return (
-    <section className="relative min-h-[calc(100vh-80px)] md:min-h-[calc(100vh-96px)] flex flex-col items-center justify-center px-4 py-16 overflow-hidden">
-      {/* Background gradient */}
+    <section className="relative min-h-screen flex flex-col items-center justify-center px-4 py-16 overflow-hidden -mt-20 md:-mt-24 pt-28 md:pt-32">
+      {/* Background gradient - extends behind navbar */}
       <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-white" />
 
       {/* Content */}
       <div className="relative z-10 w-full max-w-4xl mx-auto text-center">
-        {/* App Icon */}
+        {/* App Icon with Flip Animation */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           className="flex justify-center mb-8"
         >
-          <div className="relative">
-            {/* Shadow/glow effect */}
-            <div className="absolute inset-0 bg-[var(--brand)]/30 blur-2xl rounded-full scale-150" />
-            {/* Icon container */}
-            <div className="relative w-20 h-20 md:w-24 md:h-24 rounded-[28%] bg-gradient-to-br from-[var(--brand)] to-[#E8C400] shadow-lg flex items-center justify-center">
-              <Image
-                src="/avicroft-logo.svg"
-                alt="Avicroft"
-                width={60}
-                height={60}
-                className="w-12 h-12 md:w-14 md:h-14 brightness-0"
-              />
-            </div>
-          </div>
+          <FlipBox />
         </motion.div>
 
         {/* Headline */}
@@ -56,20 +98,10 @@ export function Hero() {
           <span className="block mt-1">
             with{' '}
             <span className="relative inline-block">
-              <span className="text-[var(--brand)]">you</span>
-              <svg
-                className="absolute -bottom-2 left-0 w-full h-3"
-                viewBox="0 0 100 12"
-                preserveAspectRatio="none"
-              >
-                <path
-                  d="M5,8 Q20,2 35,8 T65,8 T95,8"
-                  fill="none"
-                  stroke="var(--brand)"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                />
-              </svg>
+              <span className="text-[var(--brand)]">YOU</span>
+              <span
+                className="absolute -bottom-1 left-0 w-full h-1 bg-[var(--brand)] rounded-full"
+              />
             </span>
             .
           </span>
