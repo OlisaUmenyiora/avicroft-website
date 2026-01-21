@@ -24,10 +24,10 @@ export function ProductShowcase() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-            Our products
+            Start free today
           </h2>
           <p className="text-lg text-gray-500 max-w-2xl mx-auto">
-            Minimalist, easy-to-use tools designed for small businesses. Free to start, built to scale with you.
+            No credit card required. Set up in minutes, not hours. Join thousands of businesses already growing with Avicroft.
           </p>
         </motion.div>
 
