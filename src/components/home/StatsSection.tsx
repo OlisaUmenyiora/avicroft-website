@@ -1,37 +1,36 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import { PRODUCTS } from '@/lib/constants';
 
 // Floating app icons data
 const FLOATING_ICONS = [
-  { name: 'Education', color: 'bg-gradient-to-br from-[var(--brand)] to-[#E8C400]', position: 'top-[10%] left-[5%]', size: 'w-14 h-14 md:w-16 md:h-16', delay: 0 },
-  { name: 'E-commerce', color: 'bg-gradient-to-br from-blue-500 to-blue-600', position: 'top-[15%] right-[8%]', size: 'w-16 h-16 md:w-20 md:h-20', delay: 0.1 },
-  { name: 'Salon', color: 'bg-gradient-to-br from-purple-500 to-purple-600', position: 'bottom-[20%] left-[3%]', size: 'w-12 h-12 md:w-14 md:h-14', delay: 0.2 },
+  { name: 'Wellness', color: 'bg-gradient-to-br from-[var(--brand)] to-[#E8C400]', position: 'top-[10%] left-[5%]', size: 'w-14 h-14 md:w-16 md:h-16', delay: 0 },
+  { name: 'Education', color: 'bg-gradient-to-br from-blue-500 to-blue-600', position: 'top-[15%] right-[8%]', size: 'w-16 h-16 md:w-20 md:h-20', delay: 0.1 },
   { name: 'Chat', color: 'bg-white border border-gray-200', position: 'top-[25%] left-[15%]', size: 'w-14 h-14 md:w-16 md:h-16', delay: 0.15 },
   { name: 'Cloud', color: 'bg-gradient-to-br from-sky-400 to-sky-500', position: 'top-[8%] right-[20%]', size: 'w-12 h-12 md:w-14 md:h-14', delay: 0.05 },
   { name: 'Analytics', color: 'bg-gradient-to-br from-rose-500 to-rose-600', position: 'bottom-[15%] right-[5%]', size: 'w-16 h-16 md:w-18 md:h-18', delay: 0.25 },
   { name: 'Payments', color: 'bg-gradient-to-br from-emerald-500 to-emerald-600', position: 'bottom-[25%] right-[18%]', size: 'w-14 h-14 md:w-16 md:h-16', delay: 0.3 },
+  { name: 'Booking', color: 'bg-gradient-to-br from-purple-500 to-purple-600', position: 'bottom-[20%] left-[3%]', size: 'w-12 h-12 md:w-14 md:h-14', delay: 0.2 },
   { name: 'Social', color: 'bg-gradient-to-br from-orange-500 to-orange-600', position: 'top-[40%] left-[2%]', size: 'w-10 h-10 md:w-12 md:h-12', delay: 0.35 },
 ];
 
 // Icons as simple shapes
 const IconShapes: Record<string, React.ReactNode> = {
-  Education: (
+  Wellness: (
     <svg className="w-6 h-6 md:w-7 md:h-7 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+    </svg>
+  ),
+  Education: (
+    <svg className="w-7 h-7 md:w-8 md:h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5z" />
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
     </svg>
   ),
-  'E-commerce': (
-    <svg className="w-7 h-7 md:w-8 md:h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-    </svg>
-  ),
-  Salon: (
+  Booking: (
     <svg className="w-5 h-5 md:w-6 md:h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
     </svg>
   ),
   Chat: (

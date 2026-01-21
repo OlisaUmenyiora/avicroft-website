@@ -32,10 +32,11 @@ describe('Products Page', () => {
 
   it('renders CTA buttons for each product', () => {
     render(<ProductsPage />);
-    const startButtons = screen.getAllByText('Start for free');
+    // Each product has its own CTA text (Get started free, Join waitlist)
+    PRODUCTS.forEach((product) => {
+      expect(screen.getByRole('link', { name: new RegExp(product.ctaText, 'i') })).toBeInTheDocument();
+    });
     const learnMoreButtons = screen.getAllByText('Learn more');
-
-    expect(startButtons.length).toBe(PRODUCTS.length);
     expect(learnMoreButtons.length).toBe(PRODUCTS.length);
   });
 

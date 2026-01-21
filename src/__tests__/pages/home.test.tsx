@@ -22,7 +22,7 @@ describe('Home Page', () => {
   it('renders the stats section', () => {
     render(<Home />);
     expect(screen.getByText(/A growing ecosystem of/i)).toBeInTheDocument();
-    expect(screen.getByText(/3 products/i)).toBeInTheDocument();
+    expect(screen.getByText(/2 products/i)).toBeInTheDocument();
   });
 
   it('renders the product showcase section', () => {

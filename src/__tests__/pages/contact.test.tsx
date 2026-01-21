@@ -28,9 +28,9 @@ describe('Contact Page', () => {
 
   it('renders product options in select', () => {
     render(<ContactPage />);
-    expect(screen.getByRole('option', { name: 'Avicroft Salon' })).toBeInTheDocument();
-    expect(screen.getByRole('option', { name: 'Avicroft Education' })).toBeInTheDocument();
-    expect(screen.getByRole('option', { name: 'Avicroft E-commerce' })).toBeInTheDocument();
+    expect(screen.getByRole('option', { name: 'Avicroft Wellness' })).toBeInTheDocument();
+    expect(screen.getByRole('option', { name: 'Avicroft Education (Coming Soon)' })).toBeInTheDocument();
+    expect(screen.getByRole('option', { name: 'Other' })).toBeInTheDocument();
   });
 
   it('renders submit button', () => {

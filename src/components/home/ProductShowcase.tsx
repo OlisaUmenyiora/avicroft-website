@@ -3,14 +3,13 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Clock } from 'lucide-react';
 import { PRODUCTS } from '@/lib/constants';
 
-const cardColors = [
-  'from-[var(--brand)] to-[#E8C400]',
-  'from-blue-500 to-blue-600',
-  'from-purple-500 to-purple-600',
-];
+const cardColors: Record<string, string> = {
+  wellness: 'from-[var(--brand)] to-[#E8C400]',
+  education: 'from-blue-500 to-blue-600',
+};
 
 export function ProductShowcase() {
   return (
@@ -27,12 +26,12 @@ export function ProductShowcase() {
             Our products
           </h2>
           <p className="text-lg text-gray-500 max-w-2xl mx-auto">
-            Powerful solutions designed for African businesses, built to scale with your growth.
+            Minimalist, easy-to-use tools designed for small businesses. Free to start, built to scale with you.
           </p>
         </motion.div>
 
         {/* Product Cards Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid md:grid-cols-2 gap-6 lg:gap-8 max-w-4xl mx-auto">
           {PRODUCTS.map((product, index) => (
             <motion.div
               key={product.id}
@@ -53,14 +52,28 @@ export function ProductShowcase() {
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                     {/* Gradient overlay */}
-                    <div className={`absolute inset-0 bg-gradient-to-t ${cardColors[index]} opacity-20`} />
+                    <div className={`absolute inset-0 bg-gradient-to-t ${cardColors[product.id]} opacity-20`} />
+                    {/* Coming Soon Badge */}
+                    {product.status === 'coming_soon' && (
+                      <div className="absolute top-4 right-4 px-3 py-1.5 bg-blue-500 text-white text-sm font-semibold rounded-full flex items-center gap-1.5">
+                        <Clock className="w-3.5 h-3.5" />
+                        Coming Soon
+                      </div>
+                    )}
                   </div>
 
                   {/* Content */}
                   <div className="p-6">
                     <div className="flex items-start justify-between mb-3">
-                      <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${cardColors[index]} flex items-center justify-center`}>
-                        <ProductIcon name={product.id} />
+                      <div className="flex items-center gap-3">
+                        <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${cardColors[product.id]} flex items-center justify-center`}>
+                          <ProductIcon name={product.id} />
+                        </div>
+                        {product.status === 'ready' && (
+                          <span className="px-2 py-0.5 text-xs font-medium bg-green-100 text-green-700 rounded-full">
+                            Available
+                          </span>
+                        )}
                       </div>
                       <ArrowRight className="w-5 h-5 text-gray-300 group-hover:text-[var(--brand)] group-hover:translate-x-1 transition-all" />
                     </div>
@@ -109,20 +122,15 @@ export function ProductShowcase() {
 
 function ProductIcon({ name }: { name: string }) {
   const icons: Record<string, React.ReactNode> = {
-    education: (
+    wellness: (
       <svg className="w-5 h-5 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+      </svg>
+    ),
+    education: (
+      <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5z" />
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
-      </svg>
-    ),
-    ecommerce: (
-      <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-      </svg>
-    ),
-    salon: (
-      <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
     ),
   };

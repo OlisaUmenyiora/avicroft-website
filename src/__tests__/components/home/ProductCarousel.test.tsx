@@ -29,10 +29,12 @@ describe('ProductCarousel', () => {
     expect(screen.getByText('Swipe')).toBeInTheDocument();
   });
 
-  it('renders "Start for free" buttons for each product', () => {
+  it('renders CTA buttons for each product', () => {
     render(<ProductCarousel />);
-    const startButtons = screen.getAllByText('Start for free');
-    expect(startButtons.length).toBe(PRODUCTS.length);
+    // Each product has its own CTA text
+    PRODUCTS.forEach((product) => {
+      expect(screen.getByText(product.ctaText)).toBeInTheDocument();
+    });
   });
 
   it('renders "Learn more" buttons for each product', () => {
