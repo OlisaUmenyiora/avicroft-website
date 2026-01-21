@@ -67,8 +67,10 @@ export default function BlogPage() {
   return (
     <div className="bg-white">
       {/* Hero Section */}
-      <section className="py-20 md:py-32 bg-gradient-to-b from-gray-50 to-white">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+      <section className="relative py-20 md:py-32">
+        {/* Background gradient - extends behind navbar */}
+        <div className="absolute inset-x-0 top-[-100px] bottom-0 bg-gradient-to-b from-gray-100 to-white pointer-events-none" />
+        <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
             Insights & Guides
           </h1>

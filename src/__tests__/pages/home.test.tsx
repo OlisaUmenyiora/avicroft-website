@@ -27,7 +27,7 @@ describe('Home Page', () => {
 
   it('renders the product showcase section', () => {
     render(<Home />);
-    expect(screen.getByText('Our products')).toBeInTheDocument();
+    expect(screen.getByText('Start free today')).toBeInTheDocument();
   });
 
   it('renders trusted by section', () => {
