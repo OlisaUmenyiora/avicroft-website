@@ -12,58 +12,54 @@ export function Navbar() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50">
-        {/* Yellow accent line at top */}
-        <div className="h-1 bg-[var(--brand)]" />
+      <header className="fixed top-0 left-0 right-0 z-50 px-4 pt-4">
+        {/* Floating Pill Navbar */}
+        <nav className="mx-auto max-w-4xl bg-white/80 backdrop-blur-xl rounded-full shadow-lg shadow-black/5 border border-gray-100">
+          <div className="flex h-14 items-center justify-between px-4 md:px-6">
+            {/* Logo */}
+            <Link href="/" className="flex-shrink-0">
+              <Image
+                src="/avicroft-logo.svg"
+                alt="Avicroft"
+                width={120}
+                height={32}
+                className="h-7 w-auto"
+                priority
+              />
+            </Link>
 
-        <nav className="bg-[var(--brand)]">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="flex h-16 items-center justify-between md:h-20">
-              {/* Logo */}
-              <Link href="/" className="flex-shrink-0">
-                <Image
-                  src="/avicroft-logo.svg"
-                  alt="Avicroft"
-                  width={140}
-                  height={40}
-                  className="h-8 w-auto md:h-10"
-                  priority
-                />
-              </Link>
-
-              {/* Desktop Navigation */}
-              <div className="hidden md:flex md:items-center md:gap-8">
-                {NAV_LINKS.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className="text-base font-medium text-black hover:text-black/70 transition-colors"
-                  >
-                    {link.name}
-                  </Link>
-                ))}
-              </div>
-
-              {/* Desktop Login Button */}
-              <div className="hidden md:block">
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex md:items-center md:gap-8">
+              {NAV_LINKS.map((link) => (
                 <Link
-                  href="/login"
-                  className="inline-flex items-center justify-center rounded-full border-2 border-black bg-transparent px-6 py-2.5 text-sm font-semibold text-black hover:bg-black hover:text-white transition-colors"
+                  key={link.href}
+                  href={link.href}
+                  className="text-sm font-medium text-gray-600 hover:text-black transition-colors"
                 >
-                  Login
+                  {link.name}
                 </Link>
-              </div>
-
-              {/* Mobile Menu Button */}
-              <button
-                type="button"
-                className="md:hidden inline-flex items-center justify-center p-2 rounded-lg text-black hover:bg-black/10 transition-colors"
-                onClick={() => setMobileMenuOpen(true)}
-                aria-label="Open menu"
-              >
-                <Menu className="h-6 w-6" />
-              </button>
+              ))}
             </div>
+
+            {/* Desktop Login Button */}
+            <div className="hidden md:block">
+              <Link
+                href="/login"
+                className="inline-flex items-center justify-center rounded-full bg-black px-5 py-2 text-sm font-medium text-white hover:bg-gray-800 transition-colors"
+              >
+                Log in
+              </Link>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              type="button"
+              className="md:hidden inline-flex items-center justify-center p-2 rounded-full text-gray-600 hover:bg-gray-100 transition-colors"
+              onClick={() => setMobileMenuOpen(true)}
+              aria-label="Open menu"
+            >
+              <Menu className="h-5 w-5" />
+            </button>
           </div>
         </nav>
       </header>
@@ -72,7 +68,7 @@ export function Navbar() {
       <MobileMenu open={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
 
       {/* Spacer to prevent content from going under fixed header */}
-      <div className="h-[68px] md:h-[84px]" />
+      <div className="h-20 md:h-24" />
     </>
   );
 }

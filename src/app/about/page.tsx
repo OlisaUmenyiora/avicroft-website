@@ -1,133 +1,181 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 
-export const metadata = {
-  title: 'About | Avicroft',
-  description: 'Learn about Avicroft - building software products that help businesses grow across Africa and beyond.',
-};
+const VALUES = [
+  {
+    title: 'Simplicity',
+    description: 'We believe powerful software should be easy to use. Our products are designed with simplicity at their core.',
+  },
+  {
+    title: 'Reliability',
+    description: 'Businesses depend on our software. We build products that work consistently, even in challenging environments.',
+  },
+  {
+    title: 'Growth',
+    description: 'Our products are built to scale with your business. Start small and grow without limits.',
+  },
+  {
+    title: 'Support',
+    description: 'We stand behind our products with dedicated customer support to help you succeed.',
+  },
+  {
+    title: 'Innovation',
+    description: 'We continuously improve our products based on customer feedback and emerging technologies.',
+  },
+  {
+    title: 'Accessibility',
+    description: 'We build software that works for everyone, regardless of technical expertise or device.',
+  },
+];
 
 export default function AboutPage() {
   return (
     <div className="bg-white">
       {/* Hero Section */}
-      <section className="bg-[var(--brand)] py-16 md:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-black mb-6">
-              Building software that grows with you
-            </h1>
-            <p className="text-lg md:text-xl text-black/80">
-              Avicroft creates powerful, user-friendly software solutions designed to help businesses across Africa and beyond reach their full potential.
-            </p>
-          </div>
+      <section className="py-20 md:py-32 bg-gradient-to-b from-gray-50 to-white">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6"
+          >
+            Building software that{' '}
+            <span className="text-[var(--brand)]">grows</span> with you
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="text-lg md:text-xl text-gray-500 max-w-2xl mx-auto"
+          >
+            Avicroft creates powerful, user-friendly software solutions designed to help businesses across Africa and beyond reach their full potential.
+          </motion.p>
         </div>
       </section>
 
       {/* Mission Section */}
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-black mb-6">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
                 Our Mission
               </h2>
-              <p className="text-lg text-[var(--label-secondary)] mb-6">
+              <p className="text-lg text-gray-500 mb-6 leading-relaxed">
                 We believe every business deserves access to powerful software tools. Our mission is to democratize technology by building products that are intuitive, affordable, and built for the unique needs of growing businesses.
               </p>
-              <p className="text-lg text-[var(--label-secondary)]">
+              <p className="text-lg text-gray-500 leading-relaxed">
                 From salon management to school administration to e-commerce, we are committed to helping businesses digitize their operations and unlock new opportunities for growth.
               </p>
-            </div>
-            <div className="relative aspect-square rounded-2xl bg-[var(--muted)] overflow-hidden">
-              <div className="absolute inset-0 flex items-center justify-center">
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="relative aspect-square rounded-3xl bg-gradient-to-br from-[var(--brand)]/10 to-[var(--brand)]/5 overflow-hidden flex items-center justify-center"
+            >
+              <div className="relative w-32 h-32 rounded-3xl bg-gradient-to-br from-[var(--brand)] to-[#E8C400] shadow-2xl flex items-center justify-center">
                 <Image
                   src="/avicroft-logo.svg"
                   alt="Avicroft"
-                  width={200}
-                  height={60}
-                  className="opacity-20"
+                  width={80}
+                  height={80}
+                  className="w-16 h-16 brightness-0"
                 />
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* Values Section */}
-      <section className="py-16 md:py-24 bg-[var(--muted)]">
+      <section className="py-16 md:py-24 bg-gray-50">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-black mb-12 text-center">
-            Our Values
-          </h2>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Our Values
+            </h2>
+            <p className="text-lg text-gray-500">
+              The principles that guide everything we build
+            </p>
+          </motion.div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                title: 'Simplicity',
-                description: 'We believe powerful software should be easy to use. Our products are designed with simplicity at their core.',
-              },
-              {
-                title: 'Reliability',
-                description: 'Businesses depend on our software. We build products that work consistently, even in challenging environments.',
-              },
-              {
-                title: 'Growth',
-                description: 'Our products are built to scale with your business. Start small and grow without limits.',
-              },
-              {
-                title: 'Support',
-                description: 'We stand behind our products with dedicated customer support to help you succeed.',
-              },
-              {
-                title: 'Innovation',
-                description: 'We continuously improve our products based on customer feedback and emerging technologies.',
-              },
-              {
-                title: 'Accessibility',
-                description: 'We build software that works for everyone, regardless of technical expertise or device.',
-              },
-            ].map((value) => (
-              <div
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {VALUES.map((value, index) => (
+              <motion.div
                 key={value.title}
-                className="p-6 bg-white rounded-2xl"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.05 }}
+                className="p-6 bg-white rounded-2xl border border-gray-100 hover:border-gray-200 hover:shadow-lg transition-all"
               >
-                <h3 className="text-xl font-bold text-black mb-3">
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">
                   {value.title}
                 </h3>
-                <p className="text-[var(--label-secondary)]">
+                <p className="text-gray-500 text-sm leading-relaxed">
                   {value.description}
                 </p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="bg-black py-16 md:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+      <section className="bg-gray-950 py-20 md:py-28">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-3xl md:text-4xl font-bold text-white mb-4"
+          >
             Ready to grow with us?
-          </h2>
-          <p className="text-lg text-white/70 mb-8 max-w-2xl mx-auto">
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-lg text-gray-400 mb-8 max-w-xl mx-auto"
+          >
             Explore our products and see how Avicroft can help your business thrive.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="flex flex-wrap justify-center gap-4"
+          >
             <Link
               href="/products"
-              className="inline-flex items-center gap-2 rounded-full bg-[var(--brand)] px-8 py-4 text-lg font-bold text-black hover:bg-[var(--brand-hover)] transition-colors"
+              className="inline-flex items-center gap-2 rounded-full bg-white text-gray-900 px-7 py-3.5 text-base font-semibold hover:bg-gray-100 transition-colors"
             >
               View Products
-              <ArrowRight className="w-5 h-5" />
+              <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 rounded-full border-2 border-white px-8 py-4 text-lg font-bold text-white hover:bg-white hover:text-black transition-colors"
+              className="inline-flex items-center gap-2 rounded-full border border-gray-700 text-white px-7 py-3.5 text-base font-semibold hover:bg-gray-900 transition-colors"
             >
               Contact Us
             </Link>
-          </div>
+          </motion.div>
         </div>
       </section>
     </div>

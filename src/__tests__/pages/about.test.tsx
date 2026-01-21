@@ -4,7 +4,8 @@ import AboutPage from '@/app/about/page';
 describe('About Page', () => {
   it('renders the main headline', () => {
     render(<AboutPage />);
-    expect(screen.getByText(/Building software that grows with you/i)).toBeInTheDocument();
+    expect(screen.getByText(/Building software that/i)).toBeInTheDocument();
+    expect(screen.getByText('grows')).toBeInTheDocument();
   });
 
   it('renders the mission section', () => {

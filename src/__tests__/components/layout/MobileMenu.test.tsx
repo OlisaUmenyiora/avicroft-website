@@ -32,9 +32,9 @@ describe('MobileMenu', () => {
     expect(mockOnClose).toHaveBeenCalledTimes(1);
   });
 
-  it('renders login button', () => {
+  it('renders join for free button', () => {
     render(<MobileMenu open={true} onClose={mockOnClose} />);
-    expect(screen.getByText('Login')).toBeInTheDocument();
+    expect(screen.getByText('Join for free')).toBeInTheDocument();
   });
 
   it('has correct link destinations', () => {

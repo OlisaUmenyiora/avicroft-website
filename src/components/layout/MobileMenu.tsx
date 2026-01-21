@@ -11,62 +11,70 @@ interface MobileMenuProps {
   onClose: () => void;
 }
 
+const MENU_LINKS = [
+  { name: 'Changelog', href: '/changelog' },
+  { name: 'Pricing', href: '/pricing' },
+  ...NAV_LINKS,
+  { name: 'Support', href: '/support' },
+  { name: 'Log in', href: '/login' },
+];
+
 export function MobileMenu({ open, onClose }: MobileMenuProps) {
   return (
     <AnimatePresence>
       {open && (
         <>
-          {/* Backdrop */}
+          {/* Backdrop with blur */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-50 bg-black/50"
+            className="fixed inset-0 z-50 bg-white/60 backdrop-blur-sm"
             onClick={onClose}
           />
 
-          {/* Menu Panel */}
+          {/* Menu Card */}
           <motion.div
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="fixed inset-y-0 right-0 z-50 w-full max-w-sm bg-white shadow-xl"
+            initial={{ opacity: 0, scale: 0.95, y: -20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: -20 }}
+            transition={{ type: 'spring', damping: 25, stiffness: 400 }}
+            className="fixed left-4 right-4 top-4 z-50 mx-auto max-w-lg"
           >
-            <div className="flex h-full flex-col">
+            <div className="rounded-3xl bg-white shadow-2xl shadow-black/10 border border-gray-100 overflow-hidden">
               {/* Header */}
-              <div className="flex items-center justify-between border-b border-[var(--border)] px-4 py-4">
+              <div className="flex items-center justify-between px-6 pt-6 pb-4">
                 <Image
                   src="/avicroft-logo.svg"
                   alt="Avicroft"
-                  width={120}
-                  height={32}
-                  className="h-8 w-auto"
+                  width={100}
+                  height={28}
+                  className="h-6 w-auto"
                 />
                 <button
                   type="button"
-                  className="p-2 rounded-lg text-black hover:bg-[var(--muted)] transition-colors"
+                  className="p-2 -mr-2 rounded-full text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
                   onClick={onClose}
                   aria-label="Close menu"
                 >
-                  <X className="h-6 w-6" />
+                  <X className="h-5 w-5" />
                 </button>
               </div>
 
               {/* Navigation Links */}
-              <nav className="flex-1 px-4 py-6">
+              <nav className="px-6 pb-4">
                 <ul className="space-y-1">
-                  {NAV_LINKS.map((link, index) => (
+                  {MENU_LINKS.map((link, index) => (
                     <motion.li
                       key={link.href}
-                      initial={{ opacity: 0, x: 20 }}
+                      initial={{ opacity: 0, x: -10 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1 }}
+                      transition={{ delay: index * 0.05 }}
                     >
                       <Link
                         href={link.href}
-                        className="block rounded-lg px-4 py-3 text-lg font-medium text-black hover:bg-[var(--muted)] transition-colors"
+                        className="block py-2.5 text-lg font-semibold text-gray-900 hover:text-[var(--brand)] transition-colors"
                         onClick={onClose}
                       >
                         {link.name}
@@ -76,14 +84,14 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
                 </ul>
               </nav>
 
-              {/* Login Button */}
-              <div className="border-t border-[var(--border)] p-4">
+              {/* Join Button */}
+              <div className="px-6 pb-6">
                 <Link
                   href="/login"
-                  className="block w-full rounded-full bg-[var(--brand)] px-6 py-3 text-center text-base font-bold text-black hover:bg-[var(--brand-hover)] transition-colors"
+                  className="block w-full rounded-full bg-gray-900 px-6 py-3.5 text-center text-base font-semibold text-white hover:bg-black transition-colors"
                   onClick={onClose}
                 >
-                  Login
+                  Join for free
                 </Link>
               </div>
             </div>
