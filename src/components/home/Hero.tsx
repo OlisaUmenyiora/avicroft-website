@@ -57,28 +57,30 @@ function FlipBox() {
 
   return (
     <div className="relative flex flex-col items-center">
-      {/* Hanging notch/hook - like a price tag */}
-      <div className="relative z-10 w-8 h-3 bg-gray-300 rounded-t-full mb-[-2px]" />
-
       {/* Static yellow box */}
       <div className="relative w-20 h-20 md:w-24 md:h-24">
         {/* Drop shadow underneath */}
         <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-16 md:w-20 h-4 bg-black/10 rounded-full blur-md" />
 
         {/* Yellow box - always yellow */}
-        <div className="relative w-full h-full rounded-[28%] bg-[#FAD400] shadow-xl flex items-center justify-center">
+        <div className="relative w-full h-full rounded-[28%] bg-[#FAD400] shadow-xl flex flex-col items-center justify-center">
           {/* Only the text animates */}
           <AnimatePresence mode="wait">
-            <motion.span
+            <motion.div
               key={currentIndex}
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
               transition={{ duration: 0.3, ease: 'easeOut' }}
-              className="text-lg md:text-xl font-bold text-black tracking-tight"
+              className="flex flex-col items-center"
             >
-              {FLIP_PRODUCTS[currentIndex]}
-            </motion.span>
+              <span className="text-lg md:text-xl font-medium text-black tracking-tight">
+                {FLIP_PRODUCTS[currentIndex]}
+              </span>
+              <span className="text-[8px] md:text-[10px] text-black/70 tracking-tight">
+                by Avicroft
+              </span>
+            </motion.div>
           </AnimatePresence>
         </div>
       </div>
@@ -88,9 +90,9 @@ function FlipBox() {
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center px-4 py-16 overflow-hidden">
-      {/* Background gradient - extends behind navbar */}
-      <div className="absolute inset-0 -top-24 bg-gradient-to-b from-gray-50 to-white" />
+    <section className="relative min-h-screen flex flex-col items-center justify-center px-4 py-16">
+      {/* Background gradient - extends behind navbar and covers full viewport width */}
+      <div className="absolute inset-x-0 top-[-100px] bottom-0 bg-gradient-to-b from-gray-100 to-white pointer-events-none" />
 
       {/* Content */}
       <div className="relative z-10 w-full max-w-4xl mx-auto text-center pt-8">
