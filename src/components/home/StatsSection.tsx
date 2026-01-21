@@ -70,8 +70,8 @@ export function StatsSection() {
             key={icon.name}
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: icon.delay }}
+            viewport={{ once: true, amount: 0.1 }}
+            transition={{ duration: 0.4, delay: icon.delay }}
             className={`absolute ${icon.position} ${icon.size} ${icon.color} rounded-2xl shadow-lg flex items-center justify-center`}
           >
             {IconShapes[icon.name]}
@@ -84,7 +84,8 @@ export function StatsSection() {
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ duration: 0.4 }}
           className="text-lg md:text-xl text-gray-500 mb-4"
         >
           A growing ecosystem of
@@ -93,8 +94,8 @@ export function StatsSection() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ duration: 0.4, delay: 0.05 }}
           className="space-y-2"
         >
           <p className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900">

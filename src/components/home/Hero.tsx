@@ -42,11 +42,8 @@ const TRUSTED_BY = [
   },
 ];
 
-// Products for the flip animation
-const FLIP_PRODUCTS = [
-  { name: 'Aura', color: '#FAD400' },
-  { name: 'Scholar', color: '#3B82F6' },
-];
+// Products for the text animation
+const FLIP_PRODUCTS = ['Aura', 'Scholar'];
 
 function FlipBox() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -58,47 +55,30 @@ function FlipBox() {
     return () => clearInterval(interval);
   }, []);
 
-  const currentProduct = FLIP_PRODUCTS[currentIndex];
-
   return (
     <div className="relative flex flex-col items-center">
       {/* Hanging notch/hook - like a price tag */}
       <div className="relative z-10 w-8 h-3 bg-gray-300 rounded-t-full mb-[-2px]" />
 
-      {/* Flip container with perspective */}
-      <div className="relative w-20 h-20 md:w-24 md:h-24" style={{ perspective: '1000px' }}>
-        {/* Shadow/glow effect */}
-        <motion.div
-          className="absolute inset-0 blur-2xl rounded-full scale-150"
-          animate={{ backgroundColor: `${currentProduct.color}30` }}
-          transition={{ duration: 0.5 }}
-        />
-
+      {/* Static yellow box */}
+      <div className="relative w-20 h-20 md:w-24 md:h-24">
         {/* Drop shadow underneath */}
         <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-16 md:w-20 h-4 bg-black/10 rounded-full blur-md" />
 
-        {/* Flip box */}
-        <div className="relative w-full h-full" style={{ transformStyle: 'preserve-3d' }}>
+        {/* Yellow box - always yellow */}
+        <div className="relative w-full h-full rounded-[28%] bg-[#FAD400] shadow-xl flex items-center justify-center">
+          {/* Only the text animates */}
           <AnimatePresence mode="wait">
-            <motion.div
+            <motion.span
               key={currentIndex}
-              initial={{ rotateX: -90, opacity: 0 }}
-              animate={{ rotateX: 0, opacity: 1 }}
-              exit={{ rotateX: 90, opacity: 0 }}
-              transition={{
-                duration: 0.6,
-                ease: [0.4, 0, 0.2, 1],
-              }}
-              className="absolute inset-0 rounded-[28%] shadow-xl flex items-center justify-center"
-              style={{
-                backgroundColor: currentProduct.color,
-                backfaceVisibility: 'hidden',
-              }}
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              transition={{ duration: 0.3, ease: 'easeOut' }}
+              className="text-lg md:text-xl font-bold text-black tracking-tight"
             >
-              <span className="text-lg md:text-xl font-bold text-black tracking-tight">
-                {currentProduct.name}
-              </span>
-            </motion.div>
+              {FLIP_PRODUCTS[currentIndex]}
+            </motion.span>
           </AnimatePresence>
         </div>
       </div>
@@ -108,62 +88,40 @@ function FlipBox() {
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center px-4 py-16 overflow-hidden -mt-20 md:-mt-24 pt-28 md:pt-32">
+    <section className="relative min-h-screen flex flex-col items-center justify-center px-4 py-16 overflow-hidden">
       {/* Background gradient - extends behind navbar */}
-      <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-white" />
+      <div className="absolute inset-0 -top-24 bg-gradient-to-b from-gray-50 to-white" />
 
       {/* Content */}
-      <div className="relative z-10 w-full max-w-4xl mx-auto text-center">
-        {/* App Icon with Flip Animation */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="flex justify-center mb-8"
-        >
+      <div className="relative z-10 w-full max-w-4xl mx-auto text-center pt-8">
+        {/* App Icon with Text Animation */}
+        <div className="flex justify-center mb-8">
           <FlipBox />
-        </motion.div>
+        </div>
 
         {/* Headline */}
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 leading-[1.1] tracking-tight"
-        >
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 leading-[1.1] tracking-tight">
           Software products{' '}
           <span className="block mt-1">built to grow</span>
           <span className="block mt-1">
             with{' '}
             <span className="relative inline-block">
               <span className="text-[var(--brand)]">YOU</span>
-              <span
-                className="absolute -bottom-1 left-0 w-full h-1 bg-[var(--brand)] rounded-full"
-              />
+              <span className="absolute -bottom-1 left-0 w-full h-1 bg-[var(--brand)] rounded-full" />
             </span>
             .
           </span>
-        </motion.h1>
+        </h1>
 
         {/* Subtitle */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-6 text-lg md:text-xl text-gray-500 max-w-xl mx-auto"
-        >
+        <p className="mt-6 text-lg md:text-xl text-gray-500 max-w-xl mx-auto">
           Simple, affordable software for wellness businesses
           <br className="hidden sm:block" />
           and schools. Minimalist. Easy to use. Free to start.
-        </motion.p>
+        </p>
 
-        {/* CTAs - side by side on all screen sizes like Mobbin */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-10 flex flex-row items-center justify-center gap-3 sm:gap-4"
-        >
+        {/* CTAs - side by side on all screen sizes */}
+        <div className="mt-10 flex flex-row items-center justify-center gap-3 sm:gap-4">
           <Link
             href="/products"
             className="inline-flex items-center justify-center rounded-full bg-gray-900 text-white px-5 sm:px-7 py-3 sm:py-3.5 text-sm sm:text-base font-semibold hover:bg-black transition-colors shadow-lg shadow-gray-900/20"
@@ -177,15 +135,10 @@ export function Hero() {
             See our products
             <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
           </Link>
-        </motion.div>
+        </div>
 
         {/* Social Proof with real logos */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-          className="mt-16 md:mt-20"
-        >
+        <div className="mt-16 md:mt-20">
           <p className="text-sm text-gray-400 mb-6">Trusted by design teams at</p>
           <div className="flex items-center justify-center gap-6 sm:gap-8 md:gap-12 flex-wrap text-gray-300">
             {TRUSTED_BY.map((brand) => (
@@ -198,7 +151,7 @@ export function Hero() {
               </span>
             ))}
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
