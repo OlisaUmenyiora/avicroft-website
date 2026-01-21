@@ -3,16 +3,16 @@
 import { motion } from 'framer-motion';
 import { PRODUCTS } from '@/lib/constants';
 
-// Floating app icons data
+// Floating app icons data - with mobile positions that peek from edges
 const FLOATING_ICONS = [
-  { name: 'Wellness', color: 'bg-gradient-to-br from-[var(--brand)] to-[#E8C400]', position: 'top-[10%] left-[5%]', size: 'w-14 h-14 md:w-16 md:h-16', delay: 0 },
-  { name: 'Education', color: 'bg-gradient-to-br from-blue-500 to-blue-600', position: 'top-[15%] right-[8%]', size: 'w-16 h-16 md:w-20 md:h-20', delay: 0.1 },
-  { name: 'Chat', color: 'bg-white border border-gray-200', position: 'top-[25%] left-[15%]', size: 'w-14 h-14 md:w-16 md:h-16', delay: 0.15 },
-  { name: 'Cloud', color: 'bg-gradient-to-br from-sky-400 to-sky-500', position: 'top-[8%] right-[20%]', size: 'w-12 h-12 md:w-14 md:h-14', delay: 0.05 },
-  { name: 'Analytics', color: 'bg-gradient-to-br from-rose-500 to-rose-600', position: 'bottom-[15%] right-[5%]', size: 'w-16 h-16 md:w-18 md:h-18', delay: 0.25 },
-  { name: 'Payments', color: 'bg-gradient-to-br from-emerald-500 to-emerald-600', position: 'bottom-[25%] right-[18%]', size: 'w-14 h-14 md:w-16 md:h-16', delay: 0.3 },
-  { name: 'Booking', color: 'bg-gradient-to-br from-purple-500 to-purple-600', position: 'bottom-[20%] left-[3%]', size: 'w-12 h-12 md:w-14 md:h-14', delay: 0.2 },
-  { name: 'Social', color: 'bg-gradient-to-br from-orange-500 to-orange-600', position: 'top-[40%] left-[2%]', size: 'w-10 h-10 md:w-12 md:h-12', delay: 0.35 },
+  { name: 'Wellness', color: 'bg-gradient-to-br from-[var(--brand)] to-[#E8C400]', position: 'top-[5%] -left-4 md:left-[5%]', size: 'w-14 h-14 md:w-16 md:h-16', delay: 0 },
+  { name: 'Education', color: 'bg-gradient-to-br from-blue-500 to-blue-600', position: 'top-[8%] -right-4 md:right-[8%]', size: 'w-16 h-16 md:w-20 md:h-20', delay: 0.1 },
+  { name: 'Chat', color: 'bg-white border border-gray-200', position: 'top-[25%] -left-2 md:left-[15%]', size: 'w-12 h-12 md:w-16 md:h-16', delay: 0.15 },
+  { name: 'Cloud', color: 'bg-gradient-to-br from-sky-400 to-sky-500', position: 'top-[20%] -right-2 md:right-[20%]', size: 'w-11 h-11 md:w-14 md:h-14', delay: 0.05 },
+  { name: 'Analytics', color: 'bg-gradient-to-br from-rose-500 to-rose-600', position: 'bottom-[12%] -right-4 md:right-[5%]', size: 'w-14 h-14 md:w-18 md:h-18', delay: 0.25 },
+  { name: 'Payments', color: 'bg-gradient-to-br from-emerald-500 to-emerald-600', position: 'bottom-[28%] -right-2 md:right-[18%]', size: 'w-12 h-12 md:w-16 md:h-16', delay: 0.3 },
+  { name: 'Booking', color: 'bg-gradient-to-br from-purple-500 to-purple-600', position: 'bottom-[18%] -left-3 md:left-[3%]', size: 'w-12 h-12 md:w-14 md:h-14', delay: 0.2 },
+  { name: 'Social', color: 'bg-gradient-to-br from-orange-500 to-orange-600', position: 'top-[42%] -left-3 md:left-[2%]', size: 'w-10 h-10 md:w-12 md:h-12', delay: 0.35 },
 ];
 
 // Icons as simple shapes
@@ -63,8 +63,8 @@ const IconShapes: Record<string, React.ReactNode> = {
 export function StatsSection() {
   return (
     <section className="relative py-20 md:py-32 overflow-hidden bg-white">
-      {/* Floating Icons - Hidden on small mobile, visible on larger screens */}
-      <div className="absolute inset-0 hidden sm:block">
+      {/* Floating Icons - Peek from edges on mobile, fully visible on larger screens */}
+      <div className="absolute inset-0">
         {FLOATING_ICONS.map((icon) => (
           <motion.div
             key={icon.name}
