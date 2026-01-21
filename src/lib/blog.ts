@@ -107,7 +107,7 @@ At Avicroft, we built Wellness with three principles:
 
 Avicroft Wellness is free to start. Set up your salon in under 15 minutes and start accepting bookings today.
 
-[Get started free →](https://wellness.avicroft.com)
+[Get started free →](https://aura.avicroft.com)
     `,
   },
   {
@@ -207,7 +207,7 @@ Avicroft Wellness is designed specifically for this. You can set up your entire 
 - Payment tracking and invoicing
 - Business reports and analytics
 
-[Try Avicroft Wellness free →](https://wellness.avicroft.com)
+[Try Avicroft Wellness free →](https://aura.avicroft.com)
 
 ## Step 6: Market Your Business
 
@@ -263,7 +263,7 @@ Starting a wellness business is challenging but rewarding. With the right prepar
 
 Avicroft Wellness gives you everything you need to look professional and manage your business from day one. And it's free to start.
 
-[Get started free →](https://wellness.avicroft.com)
+[Get started free →](https://aura.avicroft.com)
     `,
   },
   {
@@ -377,7 +377,7 @@ Avicroft Wellness includes all the tools you need to reduce no-shows:
 
 Set it up once and let the software do the work.
 
-[Try Avicroft Wellness free →](https://wellness.avicroft.com)
+[Try Avicroft Wellness free →](https://aura.avicroft.com)
     `,
   },
   {
@@ -650,7 +650,7 @@ This is exactly what we built Avicroft Wellness to be—everything you need in o
 
 Avicroft Wellness combines booking, client management, payments, and analytics in one simple platform. It's free to start and takes less than 15 minutes to set up.
 
-[Get started free →](https://wellness.avicroft.com)
+[Get started free →](https://aura.avicroft.com)
     `,
   },
 ];

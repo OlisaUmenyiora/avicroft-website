@@ -15,7 +15,7 @@ export const PRODUCTS = [
       'Business analytics & reports',
     ],
     image: '/images/wellness-mockup.svg',
-    url: 'https://wellness.avicroft.com',
+    url: 'https://aura.avicroft.com',
     ctaText: 'Get started free',
     status: 'ready' as const,
   },

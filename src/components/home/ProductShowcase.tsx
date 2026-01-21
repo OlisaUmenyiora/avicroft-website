@@ -31,7 +31,7 @@ export function ProductShowcase() {
         </motion.div>
 
         {/* Product Cards Grid */}
-        <div className="grid md:grid-cols-2 gap-6 lg:gap-8 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-6 lg:gap-8 max-w-4xl mx-auto items-stretch">
           {PRODUCTS.map((product, index) => (
             <motion.div
               key={product.id}
@@ -39,10 +39,10 @@ export function ProductShowcase() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="group"
+              className="group h-full"
             >
-              <Link href={`/products/${product.id}`}>
-                <div className="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl hover:border-gray-200 transition-all duration-300">
+              <Link href={`/products/${product.id}`} className="block h-full">
+                <div className="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl hover:border-gray-200 transition-all duration-300 h-full flex flex-col">
                   {/* Image */}
                   <div className="relative aspect-[4/3] overflow-hidden">
                     <Image
@@ -63,7 +63,7 @@ export function ProductShowcase() {
                   </div>
 
                   {/* Content */}
-                  <div className="p-6">
+                  <div className="p-6 flex-grow flex flex-col">
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex items-center gap-3">
                         <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${cardColors[product.id]} flex items-center justify-center`}>
@@ -80,10 +80,10 @@ export function ProductShowcase() {
                     <h3 className="text-xl font-bold text-gray-900 mb-2">
                       {product.name}
                     </h3>
-                    <p className="text-sm text-gray-500 mb-4 line-clamp-2">
+                    <p className="text-sm text-gray-500 mb-4 line-clamp-2 flex-grow">
                       {product.tagline}
                     </p>
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-2 mt-auto">
                       {product.features.slice(0, 3).map((feature) => (
                         <span
                           key={feature}
