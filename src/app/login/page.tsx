@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight, Loader2 } from 'lucide-react';
-import { PRODUCTS } from '@/lib/constants';
+import { PRODUCTS, PRIMARY_LOGIN_URL } from '@/lib/constants';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -24,8 +24,8 @@ export default function LoginPage() {
   };
 
   const handleGoogleSignIn = () => {
-    // Redirect to Wellness platform (primary product) Google auth
-    window.location.href = 'https://aura.avicroft.com/auth/signin';
+    // Redirect to Aura login (primary product)
+    window.location.href = PRIMARY_LOGIN_URL;
   };
 
   return (
@@ -132,7 +132,7 @@ export default function LoginPage() {
             {PRODUCTS.map((product) => (
               <Link
                 key={product.id}
-                href={product.status === 'ready' ? `${product.url}/auth/signin` : product.url}
+                href={product.status === 'ready' ? `${product.url}/login` : product.url}
                 target="_blank"
                 className="flex items-center justify-between p-4 rounded-2xl border border-gray-800 bg-gray-900/50 hover:border-[var(--brand)] hover:bg-gray-900 transition-all group"
               >
