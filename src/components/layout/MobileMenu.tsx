@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { NAV_LINKS, PRIMARY_SIGNUP_URL } from '@/lib/constants';
+import { NAV_LINKS, PRIMARY_SIGNUP_URL, PRIMARY_LOGIN_URL } from '@/lib/constants';
 
 interface MobileMenuProps {
   open: boolean;
@@ -13,7 +13,7 @@ interface MobileMenuProps {
 
 const MENU_LINKS = [
   ...NAV_LINKS,
-  { name: 'Log in', href: '/login' },
+  { name: 'Log in', href: PRIMARY_LOGIN_URL, external: true },
 ];
 
 export function MobileMenu({ open, onClose }: MobileMenuProps) {
@@ -69,13 +69,25 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: index * 0.05 }}
                     >
-                      <Link
-                        href={link.href}
-                        className="block py-2.5 text-lg font-semibold text-gray-900 hover:text-[var(--brand)] transition-colors"
-                        onClick={onClose}
-                      >
-                        {link.name}
-                      </Link>
+                      {'external' in link && link.external ? (
+                        <a
+                          href={link.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block py-2.5 text-lg font-semibold text-gray-900 hover:text-[var(--brand)] transition-colors"
+                          onClick={onClose}
+                        >
+                          {link.name}
+                        </a>
+                      ) : (
+                        <Link
+                          href={link.href}
+                          className="block py-2.5 text-lg font-semibold text-gray-900 hover:text-[var(--brand)] transition-colors"
+                          onClick={onClose}
+                        >
+                          {link.name}
+                        </Link>
+                      )}
                     </motion.li>
                   ))}
                 </ul>

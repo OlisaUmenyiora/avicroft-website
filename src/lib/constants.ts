@@ -1,5 +1,6 @@
-// Primary signup URL - direct link to Aura (the only active product)
+// Primary URLs - direct links to Aura (the only active product)
 export const PRIMARY_SIGNUP_URL = 'https://aura.avicroft.com/signup';
+export const PRIMARY_LOGIN_URL = 'https://aura.avicroft.com/login';
 
 // Product data for Avicroft
 // Status: 'ready' = live product, 'coming_soon' = in development

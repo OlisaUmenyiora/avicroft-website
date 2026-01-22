@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
 import { Menu } from 'lucide-react';
-import { NAV_LINKS } from '@/lib/constants';
+import { NAV_LINKS, PRIMARY_LOGIN_URL } from '@/lib/constants';
 import { MobileMenu } from './MobileMenu';
 
 export function Navbar() {
@@ -43,12 +43,14 @@ export function Navbar() {
 
             {/* Desktop Login Button */}
             <div className="hidden md:block">
-              <Link
-                href="/login"
+              <a
+                href={PRIMARY_LOGIN_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center justify-center rounded-full bg-black px-5 py-2 text-sm font-medium text-white hover:bg-gray-800 transition-colors"
               >
                 Log in
-              </Link>
+              </a>
             </div>
 
             {/* Mobile Menu Button */}
