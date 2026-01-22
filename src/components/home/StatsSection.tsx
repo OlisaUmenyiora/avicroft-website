@@ -3,16 +3,21 @@
 import { motion } from 'framer-motion';
 import { PRODUCTS } from '@/lib/constants';
 
-// Floating app icons data - with mobile positions that peek from edges
-const FLOATING_ICONS = [
-  { name: 'Wellness', color: 'bg-gradient-to-br from-[var(--brand)] to-[#E8C400]', position: 'top-[5%] -left-4 md:left-[5%]', size: 'w-14 h-14 md:w-16 md:h-16', delay: 0 },
-  { name: 'Education', color: 'bg-gradient-to-br from-blue-500 to-blue-600', position: 'top-[8%] -right-4 md:right-[8%]', size: 'w-16 h-16 md:w-20 md:h-20', delay: 0.1 },
-  { name: 'Chat', color: 'bg-white border border-gray-200', position: 'top-[25%] -left-2 md:left-[15%]', size: 'w-12 h-12 md:w-16 md:h-16', delay: 0.15 },
-  { name: 'Cloud', color: 'bg-gradient-to-br from-sky-400 to-sky-500', position: 'top-[20%] -right-2 md:right-[20%]', size: 'w-11 h-11 md:w-14 md:h-14', delay: 0.05 },
-  { name: 'Analytics', color: 'bg-gradient-to-br from-rose-500 to-rose-600', position: 'bottom-[12%] -right-4 md:right-[5%]', size: 'w-14 h-14 md:w-18 md:h-18', delay: 0.25 },
-  { name: 'Payments', color: 'bg-gradient-to-br from-emerald-500 to-emerald-600', position: 'bottom-[28%] -right-2 md:right-[18%]', size: 'w-12 h-12 md:w-16 md:h-16', delay: 0.3 },
-  { name: 'Booking', color: 'bg-gradient-to-br from-purple-500 to-purple-600', position: 'bottom-[18%] -left-3 md:left-[3%]', size: 'w-12 h-12 md:w-14 md:h-14', delay: 0.2 },
-  { name: 'Social', color: 'bg-gradient-to-br from-orange-500 to-orange-600', position: 'top-[42%] -left-3 md:left-[2%]', size: 'w-10 h-10 md:w-12 md:h-12', delay: 0.35 },
+// Floating app icons data - positioned strictly on left and right edges (Mobbin-style)
+// Left side icons
+const LEFT_ICONS = [
+  { name: 'Wellness', color: 'bg-gradient-to-br from-[var(--brand)] to-[#E8C400]', position: 'top-[8%]', size: 'w-12 h-12 md:w-14 md:h-14', delay: 0 },
+  { name: 'Chat', color: 'bg-white border border-gray-200', position: 'top-[28%]', size: 'w-11 h-11 md:w-14 md:h-14', delay: 0.15 },
+  { name: 'Social', color: 'bg-gradient-to-br from-orange-500 to-orange-600', position: 'top-[48%]', size: 'w-10 h-10 md:w-12 md:h-12', delay: 0.35 },
+  { name: 'Booking', color: 'bg-gradient-to-br from-purple-500 to-purple-600', position: 'bottom-[18%]', size: 'w-11 h-11 md:w-14 md:h-14', delay: 0.2 },
+];
+
+// Right side icons
+const RIGHT_ICONS = [
+  { name: 'Education', color: 'bg-gradient-to-br from-blue-500 to-blue-600', position: 'top-[5%]', size: 'w-14 h-14 md:w-16 md:h-16', delay: 0.1 },
+  { name: 'Cloud', color: 'bg-gradient-to-br from-sky-400 to-sky-500', position: 'top-[25%]', size: 'w-11 h-11 md:w-14 md:h-14', delay: 0.05 },
+  { name: 'Payments', color: 'bg-gradient-to-br from-emerald-500 to-emerald-600', position: 'top-[48%]', size: 'w-11 h-11 md:w-14 md:h-14', delay: 0.3 },
+  { name: 'Analytics', color: 'bg-gradient-to-br from-rose-500 to-rose-600', position: 'bottom-[15%]', size: 'w-12 h-12 md:w-14 md:h-14', delay: 0.25 },
 ];
 
 // Icons as simple shapes
@@ -63,16 +68,37 @@ const IconShapes: Record<string, React.ReactNode> = {
 export function StatsSection() {
   return (
     <section className="relative py-20 md:py-32 overflow-hidden bg-white">
-      {/* Floating Icons - Peek from edges on mobile, fully visible on larger screens */}
-      <div className="absolute inset-0">
-        {FLOATING_ICONS.map((icon) => (
+      {/* Floating Icons - Positioned strictly on left and right edges (Mobbin-style) */}
+      {/* Left Side Icons */}
+      <div className="absolute left-0 top-0 bottom-0 w-16 md:w-24" data-testid="left-icons-container">
+        {LEFT_ICONS.map((icon) => (
           <motion.div
             key={icon.name}
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            data-testid={`floating-icon-${icon.name.toLowerCase()}`}
+            data-side="left"
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 0.4, delay: icon.delay }}
-            className={`absolute ${icon.position} ${icon.size} ${icon.color} rounded-2xl shadow-lg flex items-center justify-center`}
+            className={`absolute ${icon.position} -left-3 md:left-2 ${icon.size} ${icon.color} rounded-2xl shadow-lg flex items-center justify-center`}
+          >
+            {IconShapes[icon.name]}
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Right Side Icons */}
+      <div className="absolute right-0 top-0 bottom-0 w-16 md:w-24" data-testid="right-icons-container">
+        {RIGHT_ICONS.map((icon) => (
+          <motion.div
+            key={icon.name}
+            data-testid={`floating-icon-${icon.name.toLowerCase()}`}
+            data-side="right"
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.1 }}
+            transition={{ duration: 0.4, delay: icon.delay }}
+            className={`absolute ${icon.position} -right-3 md:right-2 ${icon.size} ${icon.color} rounded-2xl shadow-lg flex items-center justify-center`}
           >
             {IconShapes[icon.name]}
           </motion.div>
