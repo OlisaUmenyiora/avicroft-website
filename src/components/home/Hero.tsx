@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { PRIMARY_SIGNUP_URL } from '@/lib/constants';
 
 // Brand logos for social proof with SVG icons
 const TRUSTED_BY = [
@@ -124,14 +125,16 @@ export function Hero() {
 
         {/* CTAs - side by side on all screen sizes */}
         <div className="mt-10 flex flex-row items-center justify-center gap-3 sm:gap-4">
-          <Link
-            href="/products"
+          <a
+            href={PRIMARY_SIGNUP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center justify-center rounded-full bg-gray-900 text-white px-5 sm:px-7 py-3 sm:py-3.5 text-sm sm:text-base font-semibold hover:bg-black transition-colors shadow-lg shadow-gray-900/20"
           >
             Get started free
-          </Link>
+          </a>
           <Link
-            href="/about"
+            href="/products"
             className="group inline-flex items-center justify-center gap-1.5 sm:gap-2 rounded-full border border-gray-200 bg-white text-gray-700 px-5 sm:px-7 py-3 sm:py-3.5 text-sm sm:text-base font-semibold hover:border-gray-300 hover:bg-gray-50 transition-colors"
           >
             See our products
