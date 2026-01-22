@@ -28,8 +28,11 @@ describe('Hero', () => {
     const getStartedLink = screen.getByText(/Get started free/i).closest('a');
     const seeProductsLink = screen.getByText(/See our products/i).closest('a');
 
-    expect(getStartedLink).toHaveAttribute('href', '/products');
-    expect(seeProductsLink).toHaveAttribute('href', '/about');
+    // "Get started free" links directly to Aura signup
+    expect(getStartedLink).toHaveAttribute('href', 'https://aura.avicroft.com/signup');
+    expect(getStartedLink).toHaveAttribute('target', '_blank');
+    // "See our products" links to products page
+    expect(seeProductsLink).toHaveAttribute('href', '/products');
   });
 
   it('renders the flip box with product names', () => {
