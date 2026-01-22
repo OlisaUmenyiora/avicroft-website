@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { NAV_LINKS } from '@/lib/constants';
+import { NAV_LINKS, PRIMARY_SIGNUP_URL } from '@/lib/constants';
 
 interface MobileMenuProps {
   open: boolean;
@@ -12,10 +12,7 @@ interface MobileMenuProps {
 }
 
 const MENU_LINKS = [
-  { name: 'Changelog', href: '/changelog' },
-  { name: 'Pricing', href: '/pricing' },
   ...NAV_LINKS,
-  { name: 'Support', href: '/support' },
   { name: 'Log in', href: '/login' },
 ];
 
@@ -86,13 +83,15 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
 
               {/* Join Button */}
               <div className="px-6 pb-6">
-                <Link
-                  href="/login"
+                <a
+                  href={PRIMARY_SIGNUP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="block w-full rounded-full bg-gray-900 px-6 py-3.5 text-center text-base font-semibold text-white hover:bg-black transition-colors"
                   onClick={onClose}
                 >
                   Join for free
-                </Link>
+                </a>
               </div>
             </div>
           </motion.div>
