@@ -3,17 +3,18 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight, Loader2 } from 'lucide-react';
+import { ArrowRight, Loader2, Check } from 'lucide-react';
 import { PRODUCTS } from '@/lib/constants';
 
-export default function LoginPage() {
+export default function SignupPage() {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [showProducts, setShowProducts] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
+    if (email && name) {
       setIsLoading(true);
       // Brief delay to show loading state, then show product selection
       setTimeout(() => {
@@ -43,9 +44,12 @@ export default function LoginPage() {
         </div>
 
         {/* Heading */}
-        <h1 className="text-2xl md:text-3xl font-bold text-white text-center mb-8">
-          Welcome back
+        <h1 className="text-2xl md:text-3xl font-bold text-white text-center mb-2">
+          Create your account
         </h1>
+        <p className="text-gray-400 text-center mb-8">
+          Get started with Avicroft for free
+        </p>
 
         {!showProducts ? (
           <>
@@ -64,13 +68,6 @@ export default function LoginPage() {
                 </svg>
                 Continue with Google
               </button>
-
-              <button
-                onClick={() => setShowProducts(true)}
-                className="w-full flex items-center justify-center gap-3 rounded-full border border-gray-700 bg-transparent px-6 py-3.5 text-base font-medium text-white hover:bg-gray-900 transition-colors"
-              >
-                See other options
-              </button>
             </div>
 
             {/* Divider */}
@@ -83,13 +80,22 @@ export default function LoginPage() {
               </div>
             </div>
 
-            {/* Email Form */}
+            {/* Signup Form */}
             <form onSubmit={handleSubmit} className="space-y-4">
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Full name"
+                required
+                disabled={isLoading}
+                className="w-full rounded-full border border-gray-700 bg-gray-900 px-6 py-3.5 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-[var(--brand)] focus:border-transparent transition-all disabled:opacity-50"
+              />
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter email address"
+                placeholder="Email address"
                 required
                 disabled={isLoading}
                 className="w-full rounded-full border border-gray-700 bg-gray-900 px-6 py-3.5 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-[var(--brand)] focus:border-transparent transition-all disabled:opacity-50"
@@ -110,9 +116,19 @@ export default function LoginPage() {
               </button>
             </form>
 
+            {/* Sign in link */}
+            <div className="mt-6 text-center">
+              <Link
+                href="/login"
+                className="text-sm text-gray-500 hover:text-white transition-colors"
+              >
+                Already have an account? <span className="text-[var(--brand)]">Sign in</span>
+              </Link>
+            </div>
+
             {/* Terms */}
             <p className="mt-6 text-center text-sm text-gray-500">
-              By continuing, you agree to Avicroft&apos;s{' '}
+              By creating an account, you agree to Avicroft&apos;s{' '}
               <Link href="/terms" className="underline hover:text-white transition-colors">
                 Terms of Service
               </Link>{' '}
@@ -126,9 +142,15 @@ export default function LoginPage() {
         ) : (
           /* Product Selection */
           <div className="space-y-4">
-            <p className="text-gray-400 text-center mb-6">
-              Select your product to continue
-            </p>
+            <div className="text-center mb-6">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-green-500/10 mb-3">
+                <Check className="w-6 h-6 text-green-500" />
+              </div>
+              <p className="text-white font-medium">Great, {name.split(' ')[0]}!</p>
+              <p className="text-gray-400 text-sm mt-1">
+                Select a product to create your account
+              </p>
+            </div>
             {PRODUCTS.map((product) => (
               <Link
                 key={product.id}
@@ -137,9 +159,16 @@ export default function LoginPage() {
                 className="flex items-center justify-between p-4 rounded-2xl border border-gray-800 bg-gray-900/50 hover:border-[var(--brand)] hover:bg-gray-900 transition-all group"
               >
                 <div>
-                  <h3 className="font-semibold text-white">
-                    Avicroft {product.name}
-                  </h3>
+                  <div className="flex items-center gap-2">
+                    <h3 className="font-semibold text-white">
+                      Avicroft {product.name}
+                    </h3>
+                    {product.status === 'coming_soon' && (
+                      <span className="px-2 py-0.5 text-xs font-medium bg-blue-500/20 text-blue-400 rounded-full">
+                        Coming Soon
+                      </span>
+                    )}
+                  </div>
                   <p className="text-sm text-gray-500">
                     {product.tagline}
                   </p>
@@ -151,7 +180,7 @@ export default function LoginPage() {
               onClick={() => setShowProducts(false)}
               className="w-full text-center text-sm text-gray-500 hover:text-white transition-colors mt-4"
             >
-              &larr; Back to login
+              &larr; Back
             </button>
           </div>
         )}
