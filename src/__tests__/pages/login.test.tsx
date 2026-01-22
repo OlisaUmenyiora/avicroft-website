@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import LoginPage from '@/app/login/page';
 
 describe('Login Page', () => {
@@ -57,7 +57,9 @@ describe('Login Page', () => {
     fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
     fireEvent.click(submitButton);
 
-    // After submission, should show product selection
-    expect(screen.getByText('Select your product to continue')).toBeInTheDocument();
+    // After submission, should show product selection (with timeout)
+    await waitFor(() => {
+      expect(screen.getByText('Select your product to continue')).toBeInTheDocument();
+    }, { timeout: 1000 });
   });
 });
